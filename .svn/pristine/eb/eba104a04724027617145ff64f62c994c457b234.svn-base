@@ -1,0 +1,115 @@
+html, body, #map-canvas {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px
+}
+
+.well{
+	clear: both;
+}
+
+#panel{
+	float: left;
+    background: none repeat scroll 0 0 #fff;
+	border-radius: 5px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.61);
+    float: left;
+    display: block;
+    margin-right: 19px;
+    padding : 5px;
+}
+
+#map-canvas {
+	height: 600px;
+	float: left;
+	width: 710px;
+}
+
+
+.row{
+	float: left;
+}
+
+.rows{
+	display: block;
+	height: 80px;
+}
+
+.col-md-6{
+	width: 290px;
+	margin-right: 20px;
+}
+
+.accordion-toggle > .badge , .accordion-toggle > i{
+	float: right;
+	margin-left: 10px;
+}
+
+#missions > li > input{
+	margin-right: 10px;
+}
+
+.map{
+	width: 100%;
+}
+
+
+.competence{
+	width: 70px;
+	display: block;
+	float: left;
+}
+
+
+.collaborateurs ul{
+	list-style: none;
+	-webkit-margin-before: 0;
+	-webkit-margin-after: 0;
+	-webkit-margin-start: 0;
+	-webkit-margin-end: 0;
+	-webkit-padding-start: 0;
+}
+.collaborateur{
+	width: 30%;
+	padding: 10px 20px;
+	background-color: #EEE;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	color: #555;
+}
+.status{
+	float: right;
+	width: 20px;
+	height: 20px;
+	background-color: #AAA;
+	border-radius: 20px;
+	margin-right: 2%;
+}
+.on{
+	background-color: #20BB33;
+}
+
+ .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+.swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }

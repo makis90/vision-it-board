@@ -1,0 +1,9 @@
+'use strict';
+
+appMap.factory('Collaborateur', function ($resource) {
+    return $resource('app/rest/collaborateurs/:id', {}, {
+        'query': { method: 'GET', isArray: true},
+        'get': { method: 'GET'}
+    });
+});
+

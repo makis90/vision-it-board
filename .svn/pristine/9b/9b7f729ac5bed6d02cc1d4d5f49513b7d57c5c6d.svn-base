@@ -1,0 +1,51 @@
+
+appMap.controller('DetailsCollaborateurController', function ($scope,$location,$routeParams,resolvedCollaborateur, Collaborateur) {
+	
+	
+	var collaborateursList  =  //resolvedCollaborateur
+		[	{'IDMOB_RESS':'7648','Nom':'KOUKI1','Prenom':'Maher1','Pole':'DEV','BU':'BU SERVICES','Date_Dispo':'03/11/2015','Nbjours':'0','TJM':'0,00000','FonctionRess':'INGENIEUR ETUDE ET DEVELOPPEMENT',
+			'Dateent':'30/01/2015','Datesor':'31/12/2015','Observation':'rien','idDossier':'2617','TelPerso':'0785687061','TelClient':'11112222','MailVision':'mkouki@visionitgroup.fr','Mission':'Externe1'}, //Pole Dev en Mission
+			{'IDMOB_RESS':'7649','Nom':'KOUKI2','Prenom':'Maher2','Pole':'DEV','BU':'BU SERVICES','Date_Dispo':'03/11/2016','Nbjours':'0','TJM':'0,00000','FonctionRess':'INGENIEUR ETUDE ET DEVELOPPEMENT',
+			'Dateent':'30/11/2016','Datesor':'31/12/2999','Observation':'rien','idDossier':'2617','TelPerso':'0785687061','TelClient':'11112222','MailVision':'mkouki@visionitgroup.fr','Mission':'Externe2'}, //pole Dev en Mission
+			{'IDMOB_RESS':'7650','Nom':'KOUKI3','Prenom':'Maher3','Pole':'DEV','BU':'BU SERVICES','Date_Dispo':'03/11/2017','Nbjours':'0','TJM':'0,00000','FonctionRess':'INGENIEUR ETUDE ET DEVELOPPEMENT',
+			'Dateent':'30/11/2014','Datesor':'31/01/2015','Observation':'rien','idDossier':'2617','TelPerso':'0785687061','TelClient':'11112222','MailVision':'mkouki@visionitgroup.fr','Mission':'Externe3'}, //Pole Dev en Mission
+			{'IDMOB_RESS':'7651','Nom':'KOUKI4','Prenom':'Maher4','Pole':'DEV','BU':'BU BANQUE 1','Date_Dispo':'03/11/2014','Nbjours':'0','TJM':'0,00000','FonctionRess':'INGENIEUR ETUDE ET DEVELOPPEMENT',
+			'Dateent':'30/04/2015','Datesor':'31/12/2999','Observation':'rien','idDossier':'2617','TelPerso':'0785687061','TelClient':'11112222','MailVision':'mkouki@visionitgroup.fr','Mission':''}, //Pole Dev Intercontrat
+			{'IDMOB_RESS':'7652','Nom':'KOUKI5','Prenom':'Maher5','Pole':'DEV','BU':'BU BANQUE 1','Date_Dispo':'02/11/2014','Nbjours':'0','TJM':'0,00000','FonctionRess':'INGENIEUR ETUDE ET DEVELOPPEMENT',
+			'Dateent':'30/11/2014','Datesor':'31/12/2999','Observation':'rien','idDossier':'2617','TelPerso':'0785687061','TelClient':'11112222','MailVision':'mkouki@visionitgroup.fr','Mission':''}, //Pole Dev Intercontrat
+			{'IDMOB_RESS':'7653','Nom':'KOUKI6','Prenom':'Maher6','Pole':'INFRA','BU':'BU SERVICES','Date_Dispo':'03/11/2015','Nbjours':'0','TJM':'0,00000','FonctionRess':'INGENIEUR ETUDE ET DEVELOPPEMENT',
+			'Dateent':'30/11/2014','Datesor':'31/12/2999','Observation':'rien','idDossier':'2617','TelPerso':'0785687061','TelClient':'11112222','MailVision':'mkouki@visionitgroup.fr','Mission':'Externe1'}, //Pole INFRA en mission
+			{'IDMOB_RESS':'7654','Nom':'KOUKI7','Prenom':'Maher7','Pole':'INFRA','BU':'BU ASSURANCE 1','Date_Dispo':'03/11/2015','Nbjours':'0','TJM':'0,00000','FonctionRess':'INGENIEUR ETUDE ET DEVELOPPEMENT',
+			'Dateent':'30/11/2014','Datesor':'31/12/2999','Observation':'rien','idDossier':'2617','TelPerso':'0785687061','TelClient':'11112222','MailVision':'mkouki@visionitgroup.fr','Mission':'Externe2'}, //Pole INFRA en mission
+			{'IDMOB_RESS':'7655','Nom':'KOUKI8','Prenom':'Maher8','Pole':'INFRA','BU':'BU ASSURANCE 1','Date_Dispo':'03/11/2014','Nbjours':'0','TJM':'0,00000','FonctionRess':'INGENIEUR ETUDE ET DEVELOPPEMENT',
+			'Dateent':'30/11/2014','Datesor':'31/12/2999','Observation':'rien','idDossier':'2617','TelPerso':'0785687061','TelClient':'11112222','MailVision':'mkouki@visionitgroup.fr','Mission':''}, //Pole INFRA en intercontrat
+			{'IDMOB_RESS':'7656','Nom':'KOUKI9','Prenom':'Maher9','Pole':'INFRA','BU':'BU SERVICES','Date_Dispo':'05/11/2014','Nbjours':'0','TJM':'0,00000','FonctionRess':'INGENIEUR ETUDE ET DEVELOPPEMENT',
+			'Dateent':'30/11/2014','Datesor':'31/12/2999','Observation':'rien','idDossier':'2617','TelPerso':'0785687061','TelClient':'11112222','MailVision':'mkouki@visionitgroup.fr','Mission':''} //Pole INFRA en intercontrat
+			];
+	
+	$scope.collaborateurs = collaborateursList;
+	
+	if($routeParams.id !== undefined)
+	{
+	$scope.id = parseInt($routeParams.id);
+	$scope.collaborateur = getCollaborateurById($scope.id);
+	}
+	
+	
+	function getCollaborateurById(IDMOB_RESS)
+	{
+	var returnCollaborateur;
+	var returnCssCollaborateur;
+	for(var i=0; i<$scope.collaborateurs.length; i++){
+		if($scope.collaborateurs[i].IDMOB_RESS == IDMOB_RESS)returnCollaborateur = $scope.collaborateurs[i];
+	}
+	var CurrentDate = new Date();
+	var dateDispoCollaborateur = new Date(returnCollaborateur.Date_Dispo) ;
+	if(dateDispoCollaborateur > CurrentDate)
+		$scope.cssInterEnMission = "enmission";
+	else
+		$scope.cssInterEnMission = "inter";
+	
+	return returnCollaborateur;
+	}
+});

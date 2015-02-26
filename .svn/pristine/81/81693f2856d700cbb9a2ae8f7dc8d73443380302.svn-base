@@ -1,0 +1,15 @@
+'use strict';
+
+appMap.config(function ($routeProvider, $httpProvider, $translateProvider) {
+    $routeProvider
+        .when('/collaborateur', {
+            templateUrl: 'views/collaborateurs.html',
+            controller: 'CollaborateurController',
+            resolve:{
+            	resolvedCollaborateur: ['Collaborateur', function (Collaborateur) {
+                    return Collaborateur.query().$promise;
+                }]
+              
+            }
+        })
+});

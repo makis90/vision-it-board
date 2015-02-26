@@ -1,0 +1,50 @@
+/**
+ * fichier qui contient les fonctions globales pour l'application
+ */
+//fonction pour determiner si un objet existe dans une liste
+function contains(list, obj) {
+	    for (var i = 0; i < list.length; i++) {
+	        if (list[i] === obj) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+
+function getCurrentYear()
+{
+	var today = new Date();
+	 var yyyy = today.getFullYear()
+	return yyyy;
+}
+function getCurrentMonth(){
+	var today = new Date();
+	var mm = today.getMonth()+1;
+	if(mm<10){
+        mm='0'+mm
+    } 
+	return mm;
+}
+function getCurrentDay()
+{
+	var today = new Date();
+	var dd = today.getDate();
+    if(dd<10){
+        dd='0'+dd
+    } 
+    return dd;
+}
+
+
+function getCurrentYearCollaborateur(date)
+{
+	var dateData = date.split('/');
+	 var yyyy = dateData[2];
+	return yyyy;
+}
+function getCurrentMonthCollaborateur(date)
+{
+	var dateData = date.split('/');
+	 var mm = dateData[1];
+	return mm;
+}

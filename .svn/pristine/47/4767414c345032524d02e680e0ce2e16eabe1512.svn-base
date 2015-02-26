@@ -1,0 +1,157 @@
+'use strict';
+
+appMap.controller('PoleController', function ($scope,$location) {
+
+	$scope.chartColumn=[];
+	$scope.chartCombo=[];
+	
+	var typesInterEnMission=['Genre', 'En Mission', 'En Inter', { role: 'annotation' } ];
+	var poles = [
+	             	['Pole1', 10, 24, ''],['Pole2', 16, 22, ''],['Pole3', 28, 19, '']
+	             ];
+	
+	$scope.moisList = [{'id':'1','name':'Janvier'},
+	               {'id':'2','name':'Fevrier'},
+	               {'id':'3','name':'Mars'},
+	               {'id':'4','name':'Avril'},
+	               {'id':'5','name':'Mai'},
+	               {'id':'6','name':'Juin'},
+	               {'id':'7','name':'Juillet'},
+	               {'id':'8','name':'Aout'},
+	               {'id':'9','name':'Septembre'},
+	               {'id':'10','name':'Octobre'},
+	               {'id':'11','name':'Nouvembre'},
+	               {'id':'12','name':'Decembre'}
+	              ];
+	
+	$scope.DropDownMoisChanged =  function (e){
+		alert(e);
+		$scope.dataColumnChart = google.visualization.arrayToDataTable([
+    	        	                                                   	typesInterEnMission,
+    	         	                                                   poles[2],
+    	         	                                                   poles[1],
+    	         	                                                   poles[2]
+    	         	                                                 ]);
+
+    	         	                                                 var options = {
+    	         	                                                   width: 1000,
+    	    	         	                                           height: 600,
+    	         	                                                   legend: { position: 'top', maxLines: 3 },
+    	         	                                                   bar: { groupWidth: '75%' },
+    	         	                                                   isStacked: true,
+    	         	                                                   colors: ['#20BB33','red']
+    	         	                                                 };
+
+    	$scope.chartColumn.draw($scope.dataColumnChart, options);
+	}
+	
+    function drawChart() {
+    	 
+
+    	$scope.dataColumnChart = google.visualization.arrayToDataTable([
+    	        	                                                   	typesInterEnMission,
+    	         	                                                   poles[0],
+    	         	                                                   poles[1],
+    	         	                                                   poles[2]
+    	         	                                                 ]);
+
+    	         	                                                 var options = {
+    	         	                                                   width: 1000,
+    	         	                                                   height: 600,
+    	         	                                                   legend: { position: 'top', maxLines: 3 },
+    	         	                                                   bar: { groupWidth: '75%' },
+    	         	                                                   isStacked: true,
+    	         	                                                  colors: ['#20BB33','red']
+    	         	                                                 };
+    	         	                                                 
+        $scope.chartColumn = new google.visualization.ColumnChart(document.getElementById('columnchart_pole_div'));
+    	                                                 
+    	
+    	 google.visualization.events.addListener($scope.chartColumn, 'select', function () {
+    	        var selectedItem = $scope.chartColumn.getSelection()[0];
+    	        if (selectedItem) {
+    	          $scope.$apply(function () {
+    	            //$scope.selectFn({selectedRowIndex: selectedItem.row});
+    	            alert("row : "+selectedItem.row+"  -  column : "+selectedItem.column);
+    	            var url = '/collaborateur';// + person.id;
+    	            $location.path(url);
+    	            
+    	            $scope.dataColumnChart = google.visualization.arrayToDataTable([
+    	        	        	                                                   	typesInterEnMission,
+    	        	         	                                                   poles[1],
+    	        	         	                                                   poles[2],
+    	        	         	                                                   poles[0]
+    	        	         	                                                 ]);
+
+    	        	         	                                                 var options = {
+    	        	         	                                                   width: 1000,
+    	        	    	         	                                           height: 600,
+    	        	         	                                                   legend: { position: 'top', maxLines: 3 },
+    	        	         	                                                   bar: { groupWidth: '75%' },
+    	        	         	                                                   isStacked: true,
+    	        	         	                                                  colors: ['#20BB33','red']
+    	        	         	                                                 };
+    	        	 $scope.chartColumn.draw($scope.dataColumnChart, options);
+    	          });
+    	        }
+    	      });
+    	 
+    	 $scope.chartColumn.draw($scope.dataColumnChart, options);
+    }
+    
+	google.load('visualization', '1', {packages: ['corechart'], callback: drawChart});
+
+	
+		
+
+	function drawVisualization() {
+	  // Some raw data (not necessarily accurate)
+	  var data = google.visualization.arrayToDataTable([
+	    ['Mois', 'Entrees', 'Sorties', 'Effectifs'],
+	    ['2009/05',  10,      -6,        500],
+	    ['2009/06',  7,      0,       507],
+	    ['2009/07',  5,      -3,       509],
+	    ['2009/08',  12,      -1,       520],
+	    ['2009/09',  5,      -1,        524],
+	    ['2009/10',  1,      -4,        521],
+	    ['2009/11',  1,      -1,        521],
+	    ['2009/12',  3,      -5,        519],
+	    ['2010/01',  5,      -2,        522],
+	    ['2010/02',  4,      -3,        523],
+	    ['2010/03',  9,      -2,        530],
+	    ['2010/04',  3,      -1,        532]
+	  ]);
+
+	  var options = {
+	    title : 'Entrees / Sorties',
+	      vAxes: [{title: "Collabs", minValue: 400, maxValue: 500}, {title: "Diff"}],
+	    hAxis: {title: "Mois"},
+	    seriesType: "bars",
+	      series: {0: {targetAxisIndex: "1"}, 1: {targetAxisIndex: "1"}, 2: {type: "line"}},
+	      isStacked: true,
+	      width: 1000,
+          height: 600,
+	      colors:['#20BB33','red','#e0440e']
+	      
+	  };
+
+	  $scope.chartCombo = new google.visualization.ComboChart(document.getElementById('combochart_pole_div'));
+	  
+	  google.visualization.events.addListener($scope.chartCombo, 'select', function () {
+	        var selectedItem = $scope.chartCombo.getSelection()[0];
+	        if (selectedItem) {
+	          $scope.$apply(function () {
+	            //$scope.selectFn({selectedRowIndex: selectedItem.row});
+	            alert("row : "+selectedItem.row+"  -  column : "+selectedItem.column);
+	            var url = '/collaborateur';// + person.id;
+	           // $location.path(url);
+	          });
+	        }
+	      });
+	  
+	  $scope.chartCombo.draw(data, options);
+	}
+	
+	google.load('visualization', '1', {packages: ['corechart'], callback: drawVisualization});
+        
+});

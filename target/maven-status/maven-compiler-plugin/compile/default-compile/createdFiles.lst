@@ -1,0 +1,9 @@
+VisionBoard\config\DomainAndPersistenceConfig.class
+VisionBoard\repositories\PersonneRepository.class
+VisionBoard\boot\Boot.class
+VisionBoard\repositories\CollaborateurRepository.class
+VisionBoard\metier\Metier.class
+VisionBoard\entities\Collaborateur.class
+VisionBoard\entities\Personne.class
+VisionBoard\metier\IMetier.class
+VisionBoard\web\controllers\CollaborateurController.class

@@ -1,0 +1,43 @@
+'use strict';
+
+appMap.controller('CollaborateurController', function ($scope,$location, resolvedCollaborateur,  Collaborateur) {
+
+        $scope.collaborateurs = resolvedCollaborateur;
+
+        $scope.create = function () {
+            Collaborateur.save($scope.collaborateur,
+                function () {
+                    $scope.collaborateurs = Collaborateur.query();
+                    $('#saveCollaborateurModal').modal('hide');
+                    $scope.clear();
+                });
+        };
+
+        $scope.update = function (id) {
+            $scope.collaborateur= Collaborateur.get({id: id});
+            $('#saveCollaborateurModal').modal('show');
+        };
+
+        $scope.delete = function (id) {
+            Collaborateur.delete({id: id},
+                function () {
+                    $scope.collaborateurs = Collaborateur.query();
+                });
+        };
+
+        $scope.clear = function () {
+            $scope.collaborateur= {titre: null, nom: null, prenom: null, adresse: null, telephone: null, email: null, id: null};
+        };
+        
+        
+        
+        $scope.showDetailscollaborateur = function (id) {
+        	$scope.collaborateur= Collaborateur.get({id: id});
+        	$('#showCollaborateurModal').modal('show');
+        	//var url = '/collaborateur/' + id;
+	        //    $location.path(url);
+
+        };
+
+        
+    });

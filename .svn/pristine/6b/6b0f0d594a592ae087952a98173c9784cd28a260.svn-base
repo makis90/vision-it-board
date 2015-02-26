@@ -1,0 +1,4 @@
+{
+  "proxy":"http://proxy.visionitgroup.fr:8080",
+  "https-proxy":"http://proxy.visionitgroup.fr:8080"
+}

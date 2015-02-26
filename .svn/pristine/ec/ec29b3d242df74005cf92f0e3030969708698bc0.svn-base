@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+<meta charset=utf-8>
+<meta name="viewport"	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Vision Board</title>
+<link rel="stylesheet"
+	href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="styles/loader.css" />
+<!-- Link Loader and Swiper's CSS -->
+<link rel="stylesheet" href="styles/loader.css" />
+<link rel="stylesheet" href="styles/swiper.css">
+<link rel="stylesheet" href="styles/main.css" />
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+
+<script
+	src="bower_components/ui-bootstrap/ui-bootstrap-custom-0.12.0.js"></script>
+<script
+	src="bower_components/ui-bootstrap/ui-bootstrap-custom-tpls-0.12.0.js"></script>
+</head>
+<!-- call hideLoader onLoad to hide the loader from the page -->
+<body ng-app="appMap" ng-controller="MainController"
+	onload="hideLoader();">
+	<nav class="navbar navbar-default">
+		<div class="container" style="width: 95%; display: inline-block">
+			<div class="navbar-header" style="width: 25%; float: left;">
+				<a class="navbar-brand" href="/#" id="logoApp">
+					<p>
+						<img src="images/icon.png" alt="" width=8% height=8% /> Vision IT
+						Board
+					</p>
+				</a>
+			</div>
+			<div style="width: 25%; float: left; padding-top: 0.2%;">
+				<button id="pole" type="button" class="btn  btn-lg btn-block">Pole</button>
+			</div>
+			<div style="width: 25%; float: left; padding-top: 0.2%;">
+				<button id="bu" type="button" class="btn  btn-lg btn-block">BU</button>
+			</div>
+			<div class="collapse navbar-collapse" id="navbar-collapse"
+				ng-switch="authenticated" style="width: 25%; float: left;">
+				<ul class="nav navbar-nav nav-pills navbar-right">
+					<li><a href="#/collaborateur"> <span
+							class="glyphicon glyphicon-user"></span> <span>Collaborateurs</span>
+					</a></li>
+
+				</ul>
+			</div>
+
+		</div>
+	</nav>
+
+	<div class="loader" style="background-color: whitesmoke;">Loading...</div>
+
+	<div class="container-fluid" style="height: 89%">
+
+		<!-- <div class="well" style="height: 100%;" > -->
+		<div style="height: 100%;">
+			<div ng-view="" style="height: 100%"></div>
+		</div>
+	</div>
+	<script src="scripts/utils.js" charset="utf-8"></script>
+	<script src="bower_components/modernizr/modernizr.js"charset="utf-8"></script>
+
+	<script src="bower_components/angular-route/angular-route.js" charset="utf-8"></script>
+	<script src="bower_components/angular-translate/angular-translate.js" charset="utf-8"></script>
+	<script src="bower_components/angular-resource/angular-resource.js" charset="utf-8"></script>
+	<script
+		src="bower_components/angular-cache-buster/angular-cache-buster.js" charset="utf-8"></script>
+	<script src="bower_components/angular-animate/angular-animate.min.js" charset="utf-8"></script>
+	<script src="bower_components/bootstrap/js/affix.js" charset="utf-8"></script>
+	<script src="bower_components/bootstrap/js/alert.js" charset="utf-8"></script>
+	<script src="bower_components/bootstrap/js/dropdown.js" charset="utf-8"></script>
+	<script src="bower_components/bootstrap/js/tooltip.js" charset="utf-8"></script>
+	<script src="bower_components/bootstrap/js/modal.js" charset="utf-8"></script>
+	<script src="bower_components/bootstrap/js/transition.js" charset="utf-8"></script>
+	<script src="bower_components/bootstrap/js/button.js" charset="utf-8"></script>
+	<script src="bower_components/bootstrap/js/popover.js" charset="utf-8"></script>
+	<script src="bower_components/bootstrap/js/carousel.js" charset="utf-8"></script>
+	<script src="bower_components/bootstrap/js/scrollspy.js" charset="utf-8"></script>
+	<script src="bower_components/bootstrap/js/collapse.js" charset="utf-8"></script>
+	<script src="bower_components/bootstrap/js/tab.js" charset="utf-8"></script>
+
+	<script src="bower_components/highcharts/highcharts.js" charset="utf-8"></script>
+	<script src="bower_components/highcharts/highcharts-3d.js" charset="utf-8"></script>
+
+	<script src="scripts/entreeSortieChart/functions_es.js" charset="utf-8"></script>
+	<script src="scripts/pole/functions_pole.js" charset="utf-8"></script>
+	<script src="scripts/bu/functions_bu.js" charset="utf-8"></script>
+	<script src="scripts/app.js" charset="utf-8"></script>
+	<script src="scripts/controllers.js" charset="utf-8"></script>
+	<script src="scripts/pole/controller_pole.js" charset="utf-8"></script>
+	<script src="scripts/collaborateur/router_collaborateur.js" charset="utf-8"></script>
+	<script src="scripts/collaborateur/controller_collaborateur.js" charset="utf-8"></script>
+	<script
+		src="scripts/collaborateur/controller_details_collaborateurs.js" charset="utf-8"></script>
+	<script src="scripts/collaborateur/service_collaborateur.js" charset="utf-8"></script>
+	<script src="bower_components/swiper/swiper.min.js" charset="utf-8"></script>
+
+
+	<script>
+		//handle back button
+		//window.onbeforeunload = function() { $(".well").hide(); $(".swiper-container").show("slow");};
+
+		//function to call onload the page to hide the loader
+
+		function hideLoader() {
+			setTimeout(function() {
+				window.scrollTo(0, 1);
+			}, 0);
+			$(".loader").hide();
+			bindButtons();
+
+			$("#pole").removeClass('selected').addClass('disabled');
+		}
+
+		function bindButtons() {
+			$('#pole').on('click', function(e) {
+				$('#pole').removeClass('selected').addClass('disabled');
+				$("#bu").removeClass('disabled');
+				var url = '/#';
+				//window.location.assign(url);
+				$("#columnchart_bu_div").hide("slow");
+				$("#columnchart_pole_div").show("slow");
+			});
+			$('#bu').on('click', function(e) {
+				$('#bu').removeClass('selected').addClass('disabled');
+				$('#pole').removeClass('disabled');
+				var url = '/#';
+				//window.location.assign(url);
+				$("#columnchart_pole_div").hide("slow");
+				$("#columnchart_bu_div").show("slow");
+			});
+		}
+
+		function hideAddressBar() {
+			if (!window.location.hash) {
+				if (document.height < window.outerHeight) {
+					document.body.style.height = (window.outerHeight + 50)
+							+ 'px';
+				}
+
+				setTimeout(function() {
+					window.scrollTo(0, 1);
+				}, 0);
+			}
+		}
+
+		window.addEventListener("orientationchange", hideAddressBar);
+	</script>
+
+</body>
+</html>

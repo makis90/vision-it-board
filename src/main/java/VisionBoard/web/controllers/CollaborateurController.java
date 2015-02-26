@@ -1,0 +1,107 @@
+package VisionBoard.web.controllers;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import VisionBoard.entities.Collaborateur;
+import VisionBoard.metier.IMetier;
+import VisionBoard.repositories.CollaborateurRepository;
+
+
+
+@RestController
+@RequestMapping("/app")
+public class CollaborateurController {
+	
+	private final Logger log = LoggerFactory.getLogger(CollaborateurController.class);
+
+    @Autowired
+    private CollaborateurRepository collaborateurRepository;
+    
+    @Autowired
+    private IMetier métier;
+	
+    /**
+     * GET  /rest/collaborateurs -> get all collaborateurs.
+     */
+    @RequestMapping(value = "/rest/collaborateurs",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Collaborateur> getAllCollaborateur() {
+        log.debug("REST request to get all Collaborateurs");
+        return (List<Collaborateur>) collaborateurRepository.findAll();
+    }
+    
+    
+    /**
+     * GET  /rest/collaborateurs -> get all collaborateurs for a mission.
+     */
+    @RequestMapping(value = "/rest/collaborateurs/missions",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Collaborateur> getAllCollaborateurMission() {
+        log.debug("REST request to get all Collaborateur");
+        return (List<Collaborateur>) collaborateurRepository.findAll();
+    }
+    
+    /**
+     * POST  /rest/collaborateurs -> Create a new collaborateur.
+     */
+    @RequestMapping(value = "/rest/collaborateurs",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public void create(@RequestBody Collaborateur collaborateur) {
+        log.debug("REST request to save Collaborateur : {}", collaborateur);
+        collaborateurRepository.save(collaborateur);
+    }
+    
+    
+    /**
+     * GET  /rest/collaborateurs/:id -> get the "id" collaborateur.
+     */
+  /*  @RequestMapping(value = "/rest/collaborateurs/{id}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Collaborateur> get(@PathVariable long id) {
+        log.debug("REST request to get Collaborateur : {}", id);
+        return Optional.ofNullable(collaborateurRepository.findById(id))
+            .map(collaborateur -> new ResponseEntity<>(
+            		collaborateur,
+                HttpStatus.OK))
+            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+   */
+    /**
+     * DELETE  /rest/collaborateurs/:id -> delete the "id" collaborateur.
+     */
+    @RequestMapping(value = "/rest/collaborateurs/{id}",
+            method = RequestMethod.DELETE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public void delete(@PathVariable Long id) {
+        log.debug("REST request to delete Collaborateur : {}", id);
+        collaborateurRepository.delete(id);
+    }
+    
+    /**
+     * Nbre de collaborateur en mission par pole
+     * @param idpole
+     * @param enmission
+     * @return
+     */
+    @RequestMapping(value = "/rest/collaborateurs/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Long getCollaborateurByPoleByEnMission(@PathVariable Long idpole, Long enmission ){
+    	log.debug("REST request to get the number of Collaborateur en mission by Pole");    	
+		return collaborateurRepository.countByIdpoleAndEnmission(idpole, enmission);
+    	
+    }
+
+}

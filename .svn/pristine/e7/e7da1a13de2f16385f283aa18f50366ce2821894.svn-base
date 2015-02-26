@@ -1,0 +1,176 @@
+
+<h2>Collaborateurs</h2>
+	 
+    <center>
+    <div class="form-group">
+     		 <label>Recherche:</label>
+     		 <input type="text"  ng-model="query" class="form-control"  placeholder="Recherche par tous les criteres" style="width: 22%;">
+    </div>
+    <div class="collaborateurs">
+  	<ul>
+		<li class="collaborateur" ng-repeat="collaborateur in collaborateurs | filter:query" ng-click="showDetailscollaborateur(collaborateur.id)">
+			{{collaborateur.titre}} {{collaborateur.nom}} {{collaborateur.prenom}} {{collaborateur.idpole }}
+			<div class="status on" ></div>
+		</li>
+	</ul>
+	</div></center>
+	
+ 
+ 
+ <div class="modal fade" id="showCollaborateurModal" tabindex="-1" role="dialog" aria-labelledby="myCollaborateurLabel"
+      aria-hidden="true">
+     <div class="modal-dialog" style="width: 20%;">
+         <div class="modal-content">
+             <form name="form" role="form" novalidate
+                   class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+                   ng-submit="create()">
+
+                 <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                             ng-click="clear()">&times;</button>
+                           <div class="status on" ></div>  
+                     <h4 class="modal-title" id="myCollaborateurLabel">{{collaborateur.nom}} {{collaborateur.prenom}}</h4>
+                     
+                 </div>
+                 <div class="modal-body">
+                     <div class="form-group">
+                       
+                     <div class="form-group">
+                         <label>Titre</label>
+                         <p>{{collaborateur.titre}}</p>
+                     </div>
+                     <div class="form-group">
+                         <label>Nom</label>
+                         <p>{{collaborateur.nom}}</p>
+                     </div>
+                     <div class="form-group">
+                         <label>Prenom</label>
+                         <p>{{collaborateur.prenom}}</p>
+                     </div>
+                     <div class="form-group">
+                         <label>Adresse</label>
+                         <p>{{collaborateur.adresse}}</p>
+                     </div>
+                     <div class="form-group">
+                         <label>Telephone</label>
+                         <p>{{collaborateur.telephone}}</p>
+                     </div>
+                     <div class="form-group">
+                         <label>Email</label>
+                         <p>{{collaborateur.email}}</p>
+                     </div>
+                 </div>
+                
+             </form>
+         </div>
+     </div>
+ </div>
+ <!-- 
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Titre</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Competences</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+       		
+         
+            <tr ng-repeat="collaborateur in collaborateurs | filter:query">
+                <td>{{collaborateur.id}}</td>
+                <td>{{collaborateur.titre}}</td>
+                <td>{{collaborateur.nom}}</td>
+                <td>{{collaborateur.prenom}}</td>
+                
+                <td>
+                    <button type="submit" ng-click="update(collaborateur.id)" class="btn btn-default">
+                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                    </button>
+                    <button type="submit" ng-click="delete(collaborateur.id)" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove-circle"></span> Delete
+                    </button>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    
+    
+    
+	<button class="btn btn-primary" data-toggle="modal" data-target="#saveCollaborateurModal" ng-click="clear()">
+		<span class="glyphicon glyphicon-flash"></span> Creer un nouveau collaborateur
+	</button>
+
+ 
+ 
+ <div class="modal fade" id="saveCollaborateurModal" tabindex="-1" role="dialog" aria-labelledby="myCollaborateurLabel"
+      aria-hidden="true">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <form name="form" role="form" novalidate
+                   class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
+                   ng-submit="create()">
+
+                 <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                             ng-click="clear()">&times;</button>
+                     <h4 class="modal-title" id="myCollaborateurLabel">Create or edit a Collaborateur</h4>
+                 </div>
+                 <div class="modal-body">
+                     <div class="form-group">
+                         <label>ID</label>
+                         <input type="text" class="form-control" name="id"
+                                ng-model="collaborateur.id" readonly>
+                     </div>
+                     <div class="form-group">
+                         <label>Titre</label>
+                         <input type="text" class="form-control"
+                                ng-model="collaborateur.titre">
+                     </div>
+                     <div class="form-group">
+                         <label>Nom</label>
+                         <input type="text" class="form-control"
+                                ng-model="collaborateur.nom">
+                     </div>
+                     <div class="form-group">
+                         <label>Prenom</label>
+                         <input type="text" class="form-control"
+                                ng-model="collaborateur.prenom">
+                     </div>
+                     <div class="form-group">
+                         <label>Adresse</label>
+                         <input type="text" class="form-control"
+                                ng-model="collaborateur.adresse">
+                     </div>
+                     <div class="form-group">
+                         <label>Telephone</label>
+                         <input type="text" class="form-control"
+                                ng-model="collaborateur.telephone">
+                     </div>
+                     <div class="form-group">
+                         <label>Email</label>
+                         <input type="text" class="form-control"
+                                ng-model="collaborateur.email">
+                     </div>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+                         <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                     </button>
+                     <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">
+                         <span class="glyphicon glyphicon-save"></span> Save
+                     </button>
+                 </div>
+             </form>
+         </div>
+     </div>
+ </div>
+</div>
+ -->
+ 

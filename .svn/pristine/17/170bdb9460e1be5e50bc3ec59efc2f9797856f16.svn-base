@@ -1,0 +1,23 @@
+
+<h2>Collaborateurs</h2>
+	 
+    <center>
+    <div class="form-group">
+     		 <label>Recherche:</label>
+     		 <input type="text"  ng-model="query" class="form-control"  placeholder="Recherche par tous les criteres" style="width: 22%;">
+    </div>
+    <div class="collaborateurs">
+  	<ul>
+		<li class="collaborateur" ng-repeat="collaborateur in collaborateursEnMission | filter:query" ng-click="showDetailscollaborateur(collaborateur.IDMOB_RESS)" ng-class="getCollaborateurCssClass(collaborateur.IDMOB_RESS)">
+		<a href="#/detailscollaborateur/{{collaborateur.IDMOB_RESS}}">{{collaborateur.Nom}} {{collaborateur.Prenom}} {{collaborateur.Pole }} {{collaborateur.BU}} </a>	
+			<div ng-class="getCollaborateurCssClass(collaborateur.IDMOB_RESS)" class="status"></div>
+		</li>
+		<li class="collaborateur" ng-repeat="collaborateur in collaborateursEnInter | filter:query" ng-click="showDetailscollaborateur(collaborateur.IDMOB_RESS)" ng-class="getCollaborateurCssClass(collaborateur.IDMOB_RESS)">
+		<a href="#/detailscollaborateur/{{collaborateur.IDMOB_RESS}}">{{collaborateur.Nom}} {{collaborateur.Prenom}} {{collaborateur.Pole }} {{collaborateur.BU}} </a>	
+			<div ng-class="getCollaborateurCssClass(collaborateur.IDMOB_RESS)" class="status"></div>
+		</li>
+	</ul>	
+	</div></center>
+	
+
+ 

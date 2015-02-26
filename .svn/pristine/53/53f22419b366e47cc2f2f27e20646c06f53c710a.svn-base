@@ -1,0 +1,94 @@
+/**
+ * 
+ */
+
+	
+	//Region : Fonctions Graphe Collaborateurs Par Pole
+	function getCollaborateursByPole(pole,listCollaborateurs)
+	{	var returnCollaborateurs=[];
+		for(var i=0; i<listCollaborateurs.length; i++){
+			if(listCollaborateurs[i].Pole == pole){
+				returnCollaborateurs.push(listCollaborateurs[i]);
+			}
+		}
+		
+		return returnCollaborateurs;
+	}
+	
+		
+	function getCollaborateurEnInterByPole(idPole,listCollaborateurs)
+	{
+		var pole =getAllPoles(listCollaborateurs)[parseInt(idPole)];
+		var collaborateursByPole = getCollaborateursByPole(pole,listCollaborateurs);
+		var CurrentDate = new Date();
+	    var returnCollaborateursEnInter=[];
+	    for(var i=0; i<collaborateursByPole.length; i++){
+			var dateDispoCollaborateur = new Date(collaborateursByPole[i].Date_Dispo) ;
+			if(dateDispoCollaborateur < CurrentDate){
+				returnCollaborateursEnInter.push(collaborateursByPole[i]);
+			}
+		}
+	    return returnCollaborateursEnInter;
+	}
+	
+	function  getCollaborateurEnMissionByPole(idPole,listCollaborateurs)
+	{
+		var pole =getAllPoles(listCollaborateurs)[parseInt(idPole)];
+		var collaborateursByPole = getCollaborateursByPole(pole,listCollaborateurs);
+		var CurrentDate = new Date();
+	    var returnCollaborateursEnMission=[];
+	    for(var i=0; i<collaborateursByPole.length; i++){
+			var dateDispoCollaborateur = new Date(collaborateursByPole[i].Date_Dispo) ;
+			if(dateDispoCollaborateur > CurrentDate){
+				returnCollaborateursEnMission.push(collaborateursByPole[i]);
+			}
+		}
+	    return returnCollaborateursEnMission;
+	}
+	
+	function countCollaborateursByEnInterEnMissionByPole(pole,listCollaborateurs)
+	{
+		var collaborateursByPole = getCollaborateursByPole(pole,listCollaborateurs);
+		var CurrentDate = new Date();
+		    
+		var returnCollaborateursEnInterEnMission=[];
+		var nbCollaborateurEnInter = 0;
+		var nbCollaborateurEnMission = 0;
+		for(var i=0; i<collaborateursByPole.length; i++){
+			var dateDispoCollaborateur = new Date(collaborateursByPole[i].Date_Dispo) ;
+			if(dateDispoCollaborateur > CurrentDate){
+				nbCollaborateurEnMission++;
+			}
+			else{
+				nbCollaborateurEnInter++;
+			}
+		}
+		returnCollaborateursEnInterEnMission.push(nbCollaborateurEnMission);
+		returnCollaborateursEnInterEnMission.push(nbCollaborateurEnInter);
+		return returnCollaborateursEnInterEnMission;
+	}	
+	
+	function getAllPoles(listCollaborateurs)
+	{	var returnPoles=[];
+		for(var i=0; i<listCollaborateurs.length; i++){
+			if(!contains( returnPoles,listCollaborateurs[i].Pole)){//returnPoles.contains(collaborateurs[i].Pole)){
+				returnPoles.push(listCollaborateurs[i].Pole);
+			}
+		}
+		
+		return returnPoles;
+	}
+	
+	
+	function setColumnChartCollaborateurParPoleData(listCollaborateurs)
+	{
+		var returnData=[];
+		for(var i=0; i<getAllPoles(listCollaborateurs).length; i++){
+			var pole = [getAllPoles(listCollaborateurs)[i],countCollaborateursByEnInterEnMissionByPole(getAllPoles(listCollaborateurs)[i],listCollaborateurs)[0],countCollaborateursByEnInterEnMissionByPole(getAllPoles(listCollaborateurs)[i],listCollaborateurs)[1]] ;
+			returnData.push(pole);
+		}
+		return returnData;
+	}
+	//Fin Region : Fonctions Graphe Collaborateurs Par Pole
+	
+	
