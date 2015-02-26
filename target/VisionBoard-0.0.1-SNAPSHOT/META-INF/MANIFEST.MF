@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Built-By: mkouki
+Start-Class: VisionBoard.boot.Boot
+Spring-Boot-Version: 1.1.0.RC1
+Created-By: Apache Maven 3.2.5
+Build-Jdk: 1.8.0_31
+Main-Class: org.springframework.boot.loader.WarLauncher
+
